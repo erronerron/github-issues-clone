@@ -1,10 +1,18 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import TableListItem from "./TableListItem";
 
 const TableList = () => {
   return (
     <React.Fragment>
-      <Table striped bordered hover size="sm"></Table>
+      <table className="table table-hover table-dark">
+        <tbody>
+          <tr>
+            <td>
+              <TableListItem />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </React.Fragment>
   );
 };
