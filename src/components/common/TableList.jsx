@@ -1,17 +1,21 @@
 import React from "react";
 import TableListItem from "./TableListItem";
 
-const TableList = () => {
+const TableList = ({ issues }) => {
+  const issuesList = issues.map((item, index) => {
+    return (
+      <tr key={index}>
+        <td>
+          <TableListItem item={item} />
+        </td>
+      </tr>
+    );
+  });
+
   return (
     <React.Fragment>
       <table className="table table-hover table-dark">
-        <tbody>
-          <tr>
-            <td>
-              <TableListItem />
-            </td>
-          </tr>
-        </tbody>
+        <tbody>{issuesList}</tbody>
       </table>
     </React.Fragment>
   );
