@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TableList from "../common/TableList";
+import PaginationItem from "../common/PaginationItem";
 import TextInput from "../common/TextInput";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
@@ -45,6 +46,12 @@ const IssuesList = () => {
           </div>
         </div>
         <TableList issues={issues} />
+
+        <div className="card-footer">
+          <div className="d-flex justify-content-center">
+            <PaginationItem />
+          </div>
+        </div>
       </div>
     </div>
   );
