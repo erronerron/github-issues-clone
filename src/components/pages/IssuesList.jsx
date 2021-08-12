@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TableList from "../common/TableList";
 import PaginationItem from "../common/PaginationItem";
-import TextInput from "../common/TextInput";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const IssuesList = () => {
@@ -36,21 +35,13 @@ const IssuesList = () => {
     <div className="container my-3">
       <div className="card bg-dark text-white">
         <div className="card-header">
-          <div className="row">
-            <div className="col">
-              <TextInput />
-            </div>
-            <div className="col-2 d-flex flex-row-reverse">
-              <RadioButtonGroup />
-            </div>
-          </div>
+          <RadioButtonGroup />
         </div>
+
         <TableList issues={issues} />
 
-        <div className="card-footer">
-          <div className="d-flex justify-content-center">
-            <PaginationItem />
-          </div>
+        <div className="card-footer d-flex justify-content-center">
+          <PaginationItem />
         </div>
       </div>
     </div>
