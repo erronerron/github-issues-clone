@@ -21,17 +21,17 @@ const TableListItem = ({ item }) => {
       <div className="col">
         <div>
           <a className="fw-bold" style={titleLinkStyle} href="/">
-            Compiled template classes preserve whitespace
+            {item.title}
           </a>
           <span className="mx-2 badge rounded-pill bg-warning text-dark">
-            feature request
+            {item.type}
           </span>
         </div>
         <div>
           <span className="text-muted" style={subtitleLinkStyle}>
-            #12143 opened on Jun 21 by{" "}
+            #{item.id} opened on {item.date} by{" "}
             <a className="text-muted" style={userLinkStyle} href="/">
-              Juan dela Cruz
+              {item.author}
             </a>
           </span>
         </div>
