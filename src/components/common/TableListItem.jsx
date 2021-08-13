@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 const TableListItem = ({ item }) => {
   const badges = item.labels.map((item, index) => {
@@ -13,15 +14,6 @@ const TableListItem = ({ item }) => {
     );
   });
 
-  const formattedDate = (date) => {
-    return new Date(date).toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   return (
     <div className="mx-2">
       <div>
@@ -32,7 +24,7 @@ const TableListItem = ({ item }) => {
       </div>
       <div>
         <span className="text-muted description">
-          #{item.id} opened on {formattedDate(item.updated_at)} by{" "}
+          #{item.number} opened {moment(item.updated_at).fromNow()} by{" "}
           <a
             className="text-muted text-decoration-none description"
             href={item.user.html_url}
