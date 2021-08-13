@@ -31,8 +31,8 @@ const IssuesList = () => {
     },
   ]);
 
-  const [statuses, setStatuses] = useState(["All", "Open", "Closed"]);
   const [status, setStatus] = useState("Open");
+  const statuses = ["All", "Open", "Closed"];
 
   const handleSelectItem = (e) => {
     setStatus(e.target.value);
