@@ -31,11 +31,22 @@ const IssuesList = () => {
     },
   ]);
 
+  const [statuses, setStatuses] = useState(["All", "Open", "Closed"]);
+  const [status, setStatus] = useState("Open");
+
+  const handleSelectItem = (e) => {
+    setStatus(e.target.value);
+  };
+
   return (
     <div className="container my-3">
       <div className="card bg-dark text-white">
         <div className="card-header">
-          <RadioButtonGroup />
+          <RadioButtonGroup
+            items={statuses}
+            selected={status}
+            onSelectItem={handleSelectItem}
+          />
         </div>
 
         <TableList issues={issues} />
