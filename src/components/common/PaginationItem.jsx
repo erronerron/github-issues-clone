@@ -1,10 +1,19 @@
 import React from "react";
 
-const PaginationItem = () => {
-  const linkStyle = {
-    color: "#fff",
-    backgroundColor: "transparent",
-    borderColor: "transparent",
+const PaginationItem = ({ page, itemsPerPage, totalItems, onPageChange }) => {
+  const handlePreviousPageClick = (e) => {
+    if (page <= 1) return;
+    onPageChange(page - 1);
+  };
+
+  const handleNextPageClick = (e) => {
+    if (page >= Math.ceil(totalItems / itemsPerPage)) return;
+    onPageChange(page + 1);
+  };
+
+  const handlePageClick = (e) => {
+    if (e.target.value === page) return;
+    onPageChange(e.target.value);
   };
 
   return (
@@ -12,29 +21,21 @@ const PaginationItem = () => {
       <nav>
         <ul className="pagination">
           <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
+            <button className="page-link" onClick={handlePreviousPageClick}>
               Previous
-            </a>
+            </button>
           </li>
-          <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
+
+          <li className="page-item active">
+            <button className="page-link" value="1" onClick={handlePageClick}>
               1
-            </a>
+            </button>
           </li>
+
           <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
+            <button className="page-link" onClick={handleNextPageClick}>
               Next
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
