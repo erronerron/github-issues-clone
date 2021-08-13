@@ -9,3 +9,9 @@ a:hover {
 .description {
   font-size: 13px;
 }
+
+.pagination-item {
+  color: "#fff";
+  background-color: "transparent";
+  border-color: "transparent";
+}
