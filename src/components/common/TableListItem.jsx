@@ -14,6 +14,17 @@ const TableListItem = ({ item }) => {
     );
   });
 
+  const formattedDate = (date) => {
+    const itemDate = moment(date);
+    if (moment().diff(moment(date), "days") <= 30) {
+      return itemDate.fromNow();
+    }
+    if (itemDate.isSame(new Date(), "year")) {
+      return itemDate.format("MMM DD");
+    }
+    return itemDate.format("MMM DD, YYYY");
+  };
+
   return (
     <div className="mx-2">
       <div>
@@ -24,7 +35,7 @@ const TableListItem = ({ item }) => {
       </div>
       <div>
         <span className="text-muted description">
-          #{item.number} opened {moment(item.updated_at).fromNow()} by{" "}
+          #{item.number} opened {formattedDate(item.updated_at)} by{" "}
           <a
             className="text-muted text-decoration-none description"
             href={item.user.html_url}
