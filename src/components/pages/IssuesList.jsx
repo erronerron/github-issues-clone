@@ -1,35 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import github from "../../api/github";
 import TableList from "../common/TableList";
 import PaginationItem from "../common/PaginationItem";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const IssuesList = () => {
-  const [issues, setIssues] = useState([
-    {
-      id: 223,
-      title: "Sample Title 1",
-      description: "Sample description",
-      date: "2020-12-01",
-      author: "Juan dela cruz",
-      type: "feature request",
-    },
-    {
-      id: 32452,
-      title: "Sample Title 2",
-      description: "Sample description",
-      date: "2021-01-01",
-      author: "Juan dela cruz",
-      type: "feature request",
-    },
-    {
-      id: 4096,
-      title: "Sample Title 3",
-      description: "Sample description",
-      date: "2019-01-01",
-      author: "Maria dela cruz",
-      type: "feature request",
-    },
-  ]);
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await github.get("repos/mui-org/material-ui/issues");
+        setIssues(response.data);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+  }, []);
 
   return (
     <div className="container my-3">
