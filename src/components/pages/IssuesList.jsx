@@ -31,6 +31,14 @@ const IssuesList = () => {
     },
   ]);
 
+  const [page, setPage] = useState(1);
+  const [totalIssues, setTotalIssues] = useState(100);
+  const itemsPerPage = 10;
+
+  const handlePageChange = (pageNum) => {
+    setPage(pageNum);
+  };
+
   return (
     <div className="container my-3">
       <div className="card bg-dark text-white">
@@ -41,7 +49,12 @@ const IssuesList = () => {
         <TableList issues={issues} />
 
         <div className="card-footer d-flex justify-content-center">
-          <PaginationItem />
+          <PaginationItem
+            page={page}
+            itemsPerPage={itemsPerPage}
+            totalItems={totalIssues}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
     </div>
