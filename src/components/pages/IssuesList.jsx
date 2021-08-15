@@ -6,24 +6,28 @@ import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const IssuesList = () => {
   const [issues, setIssues] = useState([]);
+  const [status, setStatus] = useState("Open");
+  const statuses = ["All", "Open", "Closed"];
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await github.get("repos/mui-org/material-ui/issues");
+        const response = await github.get("repos/mui-org/material-ui/issues", {
+          params: {
+            state: status.toLowerCase()
+          }
+        });
         setIssues(response.data);
         console.log(response);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     };
 
     getData();
-  }, []);
+  }, [status]);
 
-  const [status, setStatus] = useState("Open");
-  const statuses = ["All", "Open", "Closed"];
-
+  
   const handleSelectItem = (e) => {
     setStatus(e.target.value);
   };
