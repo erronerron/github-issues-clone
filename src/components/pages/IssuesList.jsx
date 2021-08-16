@@ -12,7 +12,6 @@ const IssuesList = () => {
       try {
         const response = await github.get("repos/mui-org/material-ui/issues");
         setIssues(response.data);
-        console.log(response);
       } catch (error) {
         console.log(error);
       }
@@ -22,17 +21,15 @@ const IssuesList = () => {
   }, []);
 
   return (
-    <div className="container my-3">
-      <div className="card bg-dark text-white">
-        <div className="card-header">
-          <RadioButtonGroup />
-        </div>
+    <div className="card bg-dark text-white">
+      <div className="card-header">
+        <RadioButtonGroup />
+      </div>
 
-        <TableList issues={issues} />
+      <TableList issues={issues} />
 
-        <div className="card-footer d-flex justify-content-center">
-          <PaginationItem />
-        </div>
+      <div className="card-footer d-flex justify-content-center">
+        <PaginationItem />
       </div>
     </div>
   );
