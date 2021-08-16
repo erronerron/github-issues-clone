@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import github from "../../api/github";
 import TableList from "../common/TableList";
 import PaginationItem from "../common/PaginationItem";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const IssuesList = () => {
+  const { search } = useLocation();
+  const values = queryString.parse(search)
+
   const [issues, setIssues] = useState([]);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(values.page ?? 1);
   const [lastPage, setLastPage] = useState(false);
   const itemsPerPage = 10;
 
