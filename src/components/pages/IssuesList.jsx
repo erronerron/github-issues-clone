@@ -7,23 +7,29 @@ import RadioButtonGroup from "../common/RadioButtonGroup";
 const IssuesList = () => {
   const [issues, setIssues] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(false);
+  const itemsPerPage = 10;
+
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await github.get("repos/mui-org/material-ui/issues");
-        setIssues(response.data);
-        console.log(response);
+        const response = await github.get("repos/mui-org/material-ui/issues", {
+          params: {
+            page: page,
+            per_page: itemsPerPage,
+          }
+        });
+
+        setLastPage((response.data.length === 0 || response.data.length < 10));
+        setIssues(response.data ?? []);
       } catch (error) {
         console.log(error);
       }
     };
 
     getData();
-  }, []);
-
-  const [page, setPage] = useState(1);
-  const [totalIssues, setTotalIssues] = useState(100);
-  const itemsPerPage = 10;
+  }, [page]);
 
   const handlePageChange = (pageNum) => {
     setPage(pageNum);
@@ -41,8 +47,7 @@ const IssuesList = () => {
         <div className="card-footer d-flex justify-content-center">
           <PaginationItem
             page={page}
-            itemsPerPage={itemsPerPage}
-            totalItems={totalIssues}
+            lastPage={lastPage}
             onPageChange={handlePageChange}
           />
         </div>
