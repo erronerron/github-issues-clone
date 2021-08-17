@@ -7,14 +7,19 @@ import PaginationItem from "../common/PaginationItem";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const IssuesList = () => {
+  // Query Parameters
   const { search } = useLocation();
-  const values = queryString.parse(search);
+  const parsed = queryString.parse(search);
 
+  // List of issues
   const [issues, setIssues] = useState([]);
-  const [status, setStatus] = useState(values.status ?? "Open");
+
+  // Status filter
+  const [status, setStatus] = useState(parsed.status ?? "Open");
   const statuses = ["All", "Open", "Closed"];
 
-  const [page, setPage] = useState(values.page ?? 1);
+  // Pagination
+  const [page, setPage] = useState(parsed.page ?? 1);
   const [lastPage, setLastPage] = useState(false);
   const itemsPerPage = 10;
 
@@ -39,8 +44,8 @@ const IssuesList = () => {
     getData();
   }, [page, status]);
 
-  const handleSelectItem = (e) => {
-    setStatus(e.target.value);
+  const handleSelectStatus = (status) => {
+    setStatus(status);
   };
 
   const handlePageChange = (pageNum) => {
@@ -54,7 +59,7 @@ const IssuesList = () => {
           <RadioButtonGroup
             items={statuses}
             selected={status}
-            onSelectItem={handleSelectItem}
+            onSelectItem={handleSelectStatus}
           />
         </div>
 
