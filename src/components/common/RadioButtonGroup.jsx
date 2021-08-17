@@ -1,6 +1,21 @@
 import React from "react";
+import { useHistory } from "react-router";
+import queryString from "query-string";
 
 const RadioButtonGroup = ({ items, selected, onSelectItem }) => {
+  const history = useHistory();
+  const parsed = queryString.parse(history.location.search);
+
+  const handleClick = (item) => {
+    parsed.status = item;
+
+    history.push({
+      search: queryString.stringify(parsed)
+    });
+
+    onSelectItem(item);
+  }
+
   return (
     <div className="btn-group" role="group">
       {items.map((item, index) => {
@@ -13,7 +28,7 @@ const RadioButtonGroup = ({ items, selected, onSelectItem }) => {
                   ? "btn-primary disabled"
                   : "btn-outline-secondary"
               }`}
-              onClick={onSelectItem}
+              onClick={() => handleClick(item)}
               value={item}
             >
               {item}
