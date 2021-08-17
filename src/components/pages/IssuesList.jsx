@@ -54,7 +54,7 @@ const IssuesList = () => {
 
   return (
     <div className="container my-3">
-      <div className="card bg-dark text-white">
+      <div className="card bg-dark text-white card-prop">
         <div className="card-header">
           <RadioButtonGroup
             items={statuses}
