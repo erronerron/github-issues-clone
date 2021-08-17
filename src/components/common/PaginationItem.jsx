@@ -1,45 +1,66 @@
 import React from "react";
+import { useHistory } from "react-router";
 
-const PaginationItem = () => {
-  const linkStyle = {
-    color: "#fff",
-    backgroundColor: "transparent",
-    borderColor: "transparent",
+const PaginationItem = ({ page, lastPage, onPageChange }) => {
+  const history = useHistory();
+
+  const handlePreviousPageClick = (e) => {
+    page = parseInt(page);
+    if (page <= 1) return;
+    onPageChange(page - 1);
+
+    history.push({
+      pathname: '/',
+      search: `?page=${page - 1}`
+    });
   };
+
+  const handleNextPageClick = (e) => {
+    page = parseInt(page);
+    if (lastPage) return;
+    onPageChange(page + 1);
+
+    history.push({
+      pathname: '/',
+      search: `?page=${page + 1}`
+    });
+  };
+
+  
 
   return (
     <React.Fragment>
       <nav>
         <ul className="pagination">
           <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
+            <button
+              className={page === 1 ? "btn btn-dark disabled" : "btn btn-dark"}
+              onClick={handlePreviousPageClick}
+            >
               Previous
-            </a>
+            </button>
           </li>
+
           <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
-              1
-            </a>
+            <button className="btn btn-primary readonly" value={page}>
+              {page}
+            </button>
           </li>
+
           <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" style={linkStyle} href="/">
+            <button
+              className={lastPage ? "btn btn-dark disabled" : "btn btn-dark"}
+              onClick={handleNextPageClick}
+            >
               Next
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
     </React.Fragment>
   );
+
+  
 };
 
 export default PaginationItem;

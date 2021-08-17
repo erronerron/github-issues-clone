@@ -1,12 +1,22 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 import IssuesList from "./components/pages/IssuesList";
-import IssuesDetail from "./components/pages/IssuesDetail";
+// import IssuesDetail from "./components/pages/IssuesDetail";
 
 const App = () => {
   return (
-    <div className="container my-3">
-        <IssuesList />
-    </div>
+    <React.Fragment>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={IssuesList}></Route>
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
 };
 
