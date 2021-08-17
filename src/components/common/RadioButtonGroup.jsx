@@ -1,36 +1,41 @@
-const RadioButtonGroup = () => {
+import React from "react";
+import { useHistory } from "react-router";
+import queryString from "query-string";
+
+const RadioButtonGroup = ({ items, selected, onSelectItem }) => {
+  const history = useHistory();
+  const parsed = queryString.parse(history.location.search);
+
+  const handleClick = (item) => {
+    parsed.status = item;
+
+    history.push({
+      search: queryString.stringify(parsed)
+    });
+
+    onSelectItem(item);
+  }
+
   return (
     <div className="btn-group" role="group">
-      <input
-        type="radio"
-        className="btn-check"
-        name="btnradio"
-        id="btnradio1"
-        autoComplete="off"
-      />
-      <label className="btn btn-outline-secondary btn-sm" htmlFor="btnradio1">
-        All
-      </label>
-      <input
-        type="radio"
-        className="btn-check"
-        name="btnradio"
-        id="btnradio2"
-        autoComplete="off"
-      />
-      <label className="btn btn-outline-secondary btn-sm" htmlFor="btnradio2">
-        Open
-      </label>
-      <input
-        type="radio"
-        className="btn-check"
-        name="btnradio"
-        id="btnradio3"
-        autoComplete="off"
-      />
-      <label className="btn btn-outline-secondary btn-sm" htmlFor="btnradio3">
-        Closed
-      </label>
+      {items.map((item, index) => {
+        return (
+          <React.Fragment key={index}>
+            <button
+              type="button"
+              className={`btn btn-sm ${
+                item === selected
+                  ? "btn-primary disabled"
+                  : "btn-outline-secondary"
+              }`}
+              onClick={() => handleClick(item)}
+              value={item}
+            >
+              {item}
+            </button>
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 };

@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 import github from "../../api/github";
 import TableList from "../common/TableList";
 import PaginationItem from "../common/PaginationItem";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const IssuesList = () => {
+  // Query Parameters
   const { search } = useLocation();
-  const values = queryString.parse(search)
+  const parsed = queryString.parse(search);
 
+  // List of issues
   const [issues, setIssues] = useState([]);
 
-  const [page, setPage] = useState(values.page ?? 1);
+  // Status filter
+  const [status, setStatus] = useState(parsed.status ?? "Open");
+  const statuses = ["All", "Open", "Closed"];
+
+  // Pagination
+  const [page, setPage] = useState(parsed.page ?? 1);
   const [lastPage, setLastPage] = useState(false);
   const itemsPerPage = 10;
 
@@ -23,18 +30,23 @@ const IssuesList = () => {
           params: {
             page: page,
             per_page: itemsPerPage,
-          }
+            state: status.toLowerCase(),
+          },
         });
 
-        setLastPage((response.data.length === 0 || response.data.length < 10));
+        setLastPage(response.data.length === 0 || response.data.length < 10);
         setIssues(response.data ?? []);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     };
 
     getData();
-  }, [page]);
+  }, [page, status]);
+
+  const handleSelectStatus = (status) => {
+    setStatus(status);
+  };
 
   const handlePageChange = (pageNum) => {
     setPage(pageNum);
@@ -44,7 +56,11 @@ const IssuesList = () => {
     <div className="container my-3">
       <div className="card bg-dark text-white">
         <div className="card-header">
-          <RadioButtonGroup />
+          <RadioButtonGroup
+            items={statuses}
+            selected={status}
+            onSelectItem={handleSelectStatus}
+          />
         </div>
 
         <TableList issues={issues} />

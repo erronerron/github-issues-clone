@@ -1,32 +1,33 @@
 import React from "react";
 import { useHistory } from "react-router";
+import queryString from "query-string";
 
 const PaginationItem = ({ page, lastPage, onPageChange }) => {
   const history = useHistory();
+  const parsed = queryString.parse(history.location.search);
+
+  const updateQueryParams = (newValue) => {
+    parsed.page = newValue;
+
+    history.push({
+      search: queryString.stringify(parsed)
+    });
+  }
 
   const handlePreviousPageClick = (e) => {
     page = parseInt(page);
     if (page <= 1) return;
     onPageChange(page - 1);
-
-    history.push({
-      pathname: '/',
-      search: `?page=${page - 1}`
-    });
+    updateQueryParams(page - 1);
   };
 
   const handleNextPageClick = (e) => {
     page = parseInt(page);
     if (lastPage) return;
     onPageChange(page + 1);
-
-    history.push({
-      pathname: '/',
-      search: `?page=${page + 1}`
-    });
+    updateQueryParams(page + 1);
   };
 
-  
 
   return (
     <React.Fragment>
