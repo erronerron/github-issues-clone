@@ -1,5 +1,8 @@
 import React from "react";
 import moment from "moment";
+import { RiRecordCircleLine } from "react-icons/ri";
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { IconContext } from "react-icons";
 
 const TableListItem = ({ item }) => {
   const badges = item.labels.map((item, index) => {
@@ -51,16 +54,41 @@ const TableListItem = ({ item }) => {
     return itemDate.format("MMM DD, YYYY");
   };
 
+  const iconLabel = (state) => {
+    if (state === "open") {
+      return (
+        <IconContext.Provider value={{ color: "#6BC46D" }}>
+          <div>
+            <RiRecordCircleLine />
+          </div>
+        </IconContext.Provider>
+      );
+    }
+
+    return (
+      <IconContext.Provider value={{ color: "red" }}>
+        <div>
+          <IoCheckmarkCircleOutline />
+        </div>
+      </IconContext.Provider>
+    );
+  };
+
   return (
     <div className="mx-2">
-      <div>
-        <a className="fw-bold text-decoration-none" href={item.html_url}>
-          {item.title}
-        </a>
-        {badges}
-      </div>
-      <div>
-        <span className="text-muted description">{getLabel(item)}</span>
+      <div className="d-flex">
+        <div className="me-2">{iconLabel(item.state)}</div>
+        <div>
+          <div>
+            <a className="fw-bold text-decoration-none" href={item.html_url}>
+              {item.title}
+            </a>
+            {badges}
+          </div>
+          <div>
+            <span className="text-muted description">{getLabel(item)}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
