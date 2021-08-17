@@ -60,16 +60,7 @@ const TableListItem = ({ item }) => {
         {badges}
       </div>
       <div>
-        <span className="text-muted description">
-          {getLabel(item)}
-          {/* #{item.number} opened {formattedDate(item.updated_at)} by{" "}
-          <a
-            className="text-muted text-decoration-none description"
-            href={item.user.html_url}
-          >
-            {item.user.login}
-          </a> */}
-        </span>
+        <span className="text-muted description">{getLabel(item)}</span>
       </div>
     </div>
   );
