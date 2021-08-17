@@ -14,6 +14,32 @@ const TableListItem = ({ item }) => {
     );
   });
 
+  const getLabel = (item) => {
+    const user_link = (
+      <a
+        className="text-muted text-decoration-none description"
+        href={item.user.html_url}
+      >
+        {item.user.login}
+      </a>
+    );
+
+    if (item.state === "open") {
+      return (
+        <span>
+          #{item.number} opened {formattedDate(item.updated_at)} by {user_link}
+        </span>
+      );
+    }
+
+    return (
+      <span>
+        #{item.number} by {user_link} was closed{" "}
+        {formattedDate(item.updated_at)}
+      </span>
+    );
+  };
+
   const formattedDate = (date) => {
     const itemDate = moment(date);
     if (moment().diff(moment(date), "days") <= 30) {
@@ -35,13 +61,14 @@ const TableListItem = ({ item }) => {
       </div>
       <div>
         <span className="text-muted description">
-          #{item.number} opened {formattedDate(item.updated_at)} by{" "}
+          {getLabel(item)}
+          {/* #{item.number} opened {formattedDate(item.updated_at)} by{" "}
           <a
             className="text-muted text-decoration-none description"
             href={item.user.html_url}
           >
             {item.user.login}
-          </a>
+          </a> */}
         </span>
       </div>
     </div>
