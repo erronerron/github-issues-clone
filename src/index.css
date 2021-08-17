@@ -9,3 +9,12 @@ a:hover {
 .description {
   font-size: 13px;
 }
+
+.text-input {
+  color: white;
+  border-color: grey;
+}
+
+.text-input:focus {
+  color: white;
+}
