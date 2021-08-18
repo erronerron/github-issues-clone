@@ -1,5 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { fetchIssues } from "../../store//actions/index";
 
 // return error label if there is a validation error
 const renderError = ({ error, touched }) => {
@@ -42,7 +44,7 @@ const SearchForm = (props) => {
   const { handleSubmit } = props;
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    props.fetchIssues(formValues);
   };
 
   return (
@@ -72,7 +74,9 @@ const SearchForm = (props) => {
   );
 };
 
-export default reduxForm({
-  form: "searchForm",
-  validate,
-})(SearchForm);
+export default connect(null, { fetchIssues })(
+  reduxForm({
+    form: "searchForm",
+    validate,
+  })(SearchForm)
+);
