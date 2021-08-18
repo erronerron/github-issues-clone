@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import PageHeader from "./components/common/PageHeader";
 import IssuesList from "./components/pages/IssuesList";
 
