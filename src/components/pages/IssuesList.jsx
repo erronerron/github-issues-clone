@@ -5,6 +5,7 @@ import github from "../../api/github";
 import TableList from "../common/TableList";
 import PaginationItem from "../common/PaginationItem";
 import RadioButtonGroup from "../common/RadioButtonGroup";
+import SearchForm from "../common/SearchForm";
 
 const IssuesList = () => {
   // Query Parameters
@@ -55,12 +56,13 @@ const IssuesList = () => {
   return (
     <div className="container my-3">
       <div className="card bg-dark text-white card-prop">
-        <div className="card-header">
+        <div className="card-header d-flex justify-content-between">
           <RadioButtonGroup
             items={statuses}
             selected={status}
             onSelectItem={handleSelectStatus}
           />
+          <SearchForm />
         </div>
 
         <TableList issues={issues} />
