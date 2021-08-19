@@ -1,10 +1,13 @@
-import _ from "lodash";
 import { FETCH_ISSUES } from "../actions/types";
 
-const issueReducer = (state = {}, action) => {
-  switch (action.type) {
+const initialState = [];
+
+const issueReducer = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
     case FETCH_ISSUES:
-      return { ...state, ..._.mapKeys(action.payload, "id") };
+      return payload;
     default:
       return state;
   }
