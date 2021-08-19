@@ -1,7 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { fetchIssues } from "../../store//actions/index";
+import { fetchIssues, fetchRepo } from "../../store//actions/index";
 
 const renderError = ({ error, touched }) => {
   if (touched && error) {
@@ -38,9 +39,12 @@ const validate = (formValues) => {
   return errors;
 };
 
-const SearchForm = ({ handleSubmit, onFormSubmit }) => {
+const SearchForm = ({ handleSubmit }) => {
+  const dispatch = useDispatch();
+
   const onSubmit = (formValues) => {
-    onFormSubmit(formValues);
+    // onFormSubmit(formValues);
+    dispatch(fetchRepo(formValues.owner, formValues.repository));
   };
 
   return (

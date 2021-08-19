@@ -12,15 +12,14 @@ import PageHeader from "../common/PageHeader";
 
 const IssuesList = (props) => {
   const issues = useSelector((state) => state.issues);
+  const owner = useSelector((state) => state.repo.owner?.login);
+  const repository = useSelector((state) => state.repo.name);
+
   const dispatch = useDispatch();
 
   // Query Parameters
   const { search } = useLocation();
   const parsed = queryString.parse(search);
-
-  // Repository Information
-  const [owner, setOwner] = useState("");
-  const [repository, setRepository] = useState("");
 
   // Status filter
   const [status, setStatus] = useState(parsed.status ?? "open");
@@ -43,11 +42,6 @@ const IssuesList = (props) => {
     setPage(pageNum);
   };
 
-  const handleFormSubmit = (formValues) => {
-    setOwner(formValues.owner);
-    setRepository(formValues.repository);
-  };
-
   return (
     <div className="container my-3">
       <PageHeader owner={owner} repository={repository} />
@@ -58,7 +52,7 @@ const IssuesList = (props) => {
             selected={status}
             onSelectItem={handleSelectStatus}
           />
-          <SearchForm onFormSubmit={handleFormSubmit} />
+          <SearchForm />
         </div>
 
         {issues.length ? (
