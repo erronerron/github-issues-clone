@@ -6,8 +6,13 @@ const getAll = (owner, repository, page, per_page, status) => {
   );
 };
 
+const getById = (owner, repository, id) => {
+  return github.get(`repos/${owner}/${repository}/issues/${id}`);
+};
+
 const IssueService = {
   getAll,
+  getById,
 };
 
 export default IssueService;
