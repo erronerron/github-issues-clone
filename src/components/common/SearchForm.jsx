@@ -3,14 +3,12 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { fetchIssues } from "../../store//actions/index";
 
-// return error label if there is a validation error
 const renderError = ({ error, touched }) => {
   if (touched && error) {
     return <div>!</div>;
   }
 };
 
-// used to modify redux-form input
 const renderInput = ({ input, label, className, meta }) => {
   return (
     <div className="input-group has-validation">
@@ -40,11 +38,9 @@ const validate = (formValues) => {
   return errors;
 };
 
-const SearchForm = (props) => {
-  const { handleSubmit } = props;
-
+const SearchForm = ({ handleSubmit, onFormSubmit }) => {
   const onSubmit = (formValues) => {
-    props.fetchIssues(formValues);
+    onFormSubmit(formValues);
   };
 
   return (
