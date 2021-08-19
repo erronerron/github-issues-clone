@@ -1,25 +1,19 @@
 import React from "react";
 
-const PageHeader = () => {
+const PageHeader = ({ owner, repository }) => {
+  const headerDetails = (
+    <div className="d-flex align-items-center">
+      <div className="page-link-item page-link-main">{owner}</div>
+      <span className="mx-2">/</span>
+      <div className="page-link-item page-link-sub">{repository}</div>
+    </div>
+  );
+
   return (
     <React.Fragment>
       <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid">
-          <div className="my-2 mx-2">
-            <a
-              className="page-link-item page-link-main"
-              href="https://github.com/mui-org"
-            >
-              mui-org
-            </a>
-            <span className="mx-2">/</span>
-            <a
-              className="page-link-item page-link-sub"
-              href="https://github.com/mui-org/material-ui"
-            >
-              material-ui
-            </a>
-          </div>
+          {owner && repository ? headerDetails : ""}
         </div>
       </nav>
     </React.Fragment>

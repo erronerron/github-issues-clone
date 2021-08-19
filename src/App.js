@@ -6,7 +6,7 @@ import IssuesList from "./components/pages/IssuesList";
 const App = () => {
   return (
     <React.Fragment>
-      <PageHeader />
+      {/* <PageHeader /> */}
       <Router>
         <Switch>
           <Route path="/" exact component={IssuesList}></Route>

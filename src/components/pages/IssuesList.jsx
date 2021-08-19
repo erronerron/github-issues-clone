@@ -8,6 +8,7 @@ import TableList from "../common/TableList";
 import PaginationItem from "../common/PaginationItem";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 import SearchForm from "../common/SearchForm";
+import PageHeader from "../common/PageHeader";
 
 const IssuesList = (props) => {
   const issues = useSelector((state) => state.issues);
@@ -49,6 +50,7 @@ const IssuesList = (props) => {
 
   return (
     <div className="container my-3">
+      <PageHeader owner={owner} repository={repository} />
       <div className="card bg-dark text-white card-prop">
         <div className="card-header d-flex justify-content-between">
           <RadioButtonGroup
