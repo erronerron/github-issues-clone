@@ -36,3 +36,21 @@ body {
 .card-prop {
   border-color: #444c56;
 }
+
+.page-detail-title {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #adbac7;
+}
+
+.page-detail-subtitle {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #92a3b4;
+}
+
+
+.page-detail-badge {
+  font-size: 1rem;
+  font-weight: 400;
+}

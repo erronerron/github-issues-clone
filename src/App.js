@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import PageHeader from "./components/common/PageHeader";
 import IssuesList from "./components/pages/IssuesList";
-// import IssuesDetail from "./components/pages/IssuesDetail";
+import IssuesDetail from "./components/pages/IssuesDetail";
 
 const App = () => {
   return (
@@ -11,7 +11,8 @@ const App = () => {
       <PageHeader />
       <Router>
         <Switch>
-          <Route path="/" exact component={IssuesList}></Route>
+          <Route path="/issues/:id" exact component={IssuesDetail}></Route>
+          <Route path="/issues" exact component={IssuesList}></Route>
         </Switch>
       </Router>
     </React.Fragment>
