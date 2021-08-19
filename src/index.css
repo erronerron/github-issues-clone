@@ -9,3 +9,30 @@ a:hover {
 .description {
   font-size: 13px;
 }
+
+span {
+  color: white;
+}
+
+.page-link-item {
+  color: #539bf5;
+  text-decoration: none;
+}
+
+.page-link-main {
+  font-size: 1.2rem;
+}
+
+.page-link-sub {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+body {
+  background-color: #212529;
+  /* background-color: #22272e; */
+}
+
+.card-prop {
+  border-color: #444c56;
+}
