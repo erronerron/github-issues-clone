@@ -4,6 +4,8 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { fetchIssues, fetchRepo } from "../../store//actions/index";
 
+let disabledClass = true;
+
 const renderError = ({ error, touched }) => {
   if (touched && error) {
     return <div>!</div>;
@@ -27,6 +29,7 @@ const renderInput = ({ input, label, className, meta }) => {
 
 const validate = (formValues) => {
   const errors = {};
+  disabledClass = !formValues.owner || !formValues.repository;
 
   if (!formValues.owner) {
     errors.owner = "The owner field is required.";
@@ -43,7 +46,6 @@ const SearchForm = ({ handleSubmit }) => {
   const dispatch = useDispatch();
 
   const onSubmit = (formValues) => {
-    // onFormSubmit(formValues);
     dispatch(fetchRepo(formValues.owner, formValues.repository));
   };
 
@@ -66,7 +68,11 @@ const SearchForm = ({ handleSubmit }) => {
       />
 
       <div>
-        <button type="submit" className="btn btn-primary btn-sm mx-2">
+        <button
+          type="submit"
+          className="btn btn-primary btn-sm mx-2"
+          disabled={disabledClass}
+        >
           Submit
         </button>
       </div>
