@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 import queryString from "query-string";
 
-const PaginationItem = ({ page, lastPage, onPageChange }) => {
+const PaginationItem = ({ page, onPageChange }) => {
   const history = useHistory();
   const parsed = queryString.parse(history.location.search);
 
@@ -10,9 +10,9 @@ const PaginationItem = ({ page, lastPage, onPageChange }) => {
     parsed.page = newValue;
 
     history.push({
-      search: queryString.stringify(parsed)
+      search: queryString.stringify(parsed),
     });
-  }
+  };
 
   const handlePreviousPageClick = (e) => {
     page = parseInt(page);
@@ -23,11 +23,9 @@ const PaginationItem = ({ page, lastPage, onPageChange }) => {
 
   const handleNextPageClick = (e) => {
     page = parseInt(page);
-    if (lastPage) return;
     onPageChange(page + 1);
     updateQueryParams(page + 1);
   };
-
 
   return (
     <React.Fragment>
@@ -50,7 +48,7 @@ const PaginationItem = ({ page, lastPage, onPageChange }) => {
 
           <li className="page-item">
             <button
-              className={lastPage ? "btn btn-dark disabled" : "btn btn-dark"}
+              className="btn btn-dark"
               onClick={handleNextPageClick}
             >
               Next
@@ -60,8 +58,6 @@ const PaginationItem = ({ page, lastPage, onPageChange }) => {
       </nav>
     </React.Fragment>
   );
-
-  
 };
 
 export default PaginationItem;
