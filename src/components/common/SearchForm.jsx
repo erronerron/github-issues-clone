@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { fetchIssues, fetchRepo } from "../../store//actions/index";
+import { fetchRepo } from "../../store//actions/index";
 
 let disabledClass = true;
 
@@ -80,7 +80,12 @@ const SearchForm = ({ handleSubmit }) => {
   );
 };
 
-export default connect(null, { fetchIssues })(
+export default connect(
+  () => ({
+    initialValues: { owner: "facebook", repository: "react" },
+  }),
+  { fetchRepo }
+)(
   reduxForm({
     form: "searchForm",
     validate,

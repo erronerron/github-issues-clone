@@ -1,6 +1,6 @@
 import { FETCH_REPO } from "../actions/types";
 
-const initialState = {};
+const initialState = { owner: { login: "facebook" }, name: "react" };
 
 const repoReducer = (state = initialState, action) => {
   const { type, payload } = action;
