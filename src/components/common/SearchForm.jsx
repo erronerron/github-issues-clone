@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";

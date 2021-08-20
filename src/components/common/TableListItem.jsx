@@ -1,21 +1,17 @@
 import React from "react";
-import moment from "moment";
 import { RiRecordCircleLine } from "react-icons/ri";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { IconContext } from "react-icons";
+import { Link } from "react-router-dom";
+import { formattedDate } from "../../utils/fomatter";
+import BadgeItem from "./BadgeItem";
 
 const TableListItem = ({ item }) => {
-  const badges = item.labels.map((item, index) => {
-    let badgeStyle = {
-      backgroundColor: `#${item.color}`,
-    };
-
-    return (
-      <span key={index} className="mx-2 badge rounded-pill" style={badgeStyle}>
-        {item.name}
-      </span>
-    );
-  });
+  const badges = (items = []) => {
+    return items.map((item, index) => {
+      return <BadgeItem key={index} item={item} />;
+    });
+  };
 
   const getLabel = (item) => {
     const user_link = (
@@ -41,17 +37,6 @@ const TableListItem = ({ item }) => {
         {formattedDate(item.updated_at)}
       </span>
     );
-  };
-
-  const formattedDate = (date) => {
-    const itemDate = moment(date);
-    if (moment().diff(moment(date), "days") <= 30) {
-      return itemDate.fromNow();
-    }
-    if (itemDate.isSame(new Date(), "year")) {
-      return itemDate.format("MMM DD");
-    }
-    return itemDate.format("MMM DD, YYYY");
   };
 
   const iconLabel = (state) => {
@@ -80,10 +65,13 @@ const TableListItem = ({ item }) => {
         <div className="me-2">{iconLabel(item.state)}</div>
         <div>
           <div>
-            <a className="fw-bold text-decoration-none" href={item.html_url}>
+            <Link
+              className="fw-bold text-decoration-none"
+              to={`/issues/${item.number}`}
+            >
               {item.title}
-            </a>
-            {badges}
+            </Link>
+            {badges(item.labels ?? [])}
           </div>
           <div>
             <span className="text-muted description">{getLabel(item)}</span>
