@@ -10,6 +10,8 @@ import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
 import BadgeItem from "../common/BadgeItem";
 import { formattedDate } from "../../utils/fomatter";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 
 const IssuesDetail = () => {
   const issue = useSelector((state) => state.issue);
@@ -29,8 +31,8 @@ const IssuesDetail = () => {
     });
   };
 
-  const getLabel = (item) => {
-    const user_link = (
+  const userLink = (item) => {
+    return (
       <a
         className="text-muted text-decoration-none description"
         href={item.user?.html_url}
@@ -38,10 +40,12 @@ const IssuesDetail = () => {
         {item.user?.login}
       </a>
     );
+  };
 
+  const getLabel = (item) => {
     return (
       <span>
-        {user_link} opened this issue {formattedDate(item.created_at)}
+        {userLink(item)} opened this issue {formattedDate(item.created_at)}
       </span>
     );
   };
@@ -75,8 +79,8 @@ const IssuesDetail = () => {
   return (
     <div className="container my-3">
       <PageHeader owner={owner} repository={repository} />
-      <div className="card bg-dark text-white card-prop">
-        <div className="card-header align-items-center">
+      <div className="card bg-dark text-white flat-item">
+        <div className="mx-2">
           <h1 className="page-detail-title">{`${issue.title} #${issue.number}`}</h1>
           <div className="d-flex">
             <div>{iconLabel(issue)}</div>
@@ -85,9 +89,35 @@ const IssuesDetail = () => {
               <div className="my-1">{badges(issue.labels ?? [])}</div>
             </div>
           </div>
+
+          <hr />
         </div>
 
-        <div className="card-footer d-flex justify-content-center"></div>
+        <div className="card-body d-flex">
+          <div className="mx-2">
+            <img
+              className="img-profile-comment"
+              src={issue.user?.avatar_url}
+              alt=""
+            />
+          </div>
+          <div className="flex-fill issue-comment-body">
+            <div className="card bg-dark text-white card-prop">
+              <div className="card-header">
+                <span className="page-detail-subtitle">
+                  {userLink(issue)} commented {formattedDate(issue.created_at)}
+                </span>
+              </div>
+              <div className="card-body">
+                <div className="markdown-body">
+                  <ReactMarkdown escapeHtml={false} rehypePlugins={[rehypeRaw]}>
+                    {issue.body}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

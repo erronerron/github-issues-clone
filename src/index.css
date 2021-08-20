@@ -30,6 +30,7 @@ span {
 
 body {
   background-color: #212529;
+  color: #adbac7;
   /* background-color: #22272e; */
 }
 
@@ -49,11 +50,52 @@ body {
   color: #92a3b4;
 }
 
-
 .page-detail-badge {
   font-size: 1rem;
   font-weight: 400;
 }
 .error-field {
   border-color: red;
+}
+
+.flat-item {
+  border: none;
+  background-color: #212529;
+}
+
+.img-profile-comment {
+  border-radius: 50%;
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.issue-comment-body {
+  max-width: 95%;
+}
+
+.markdown-body {
+  color: #adbac7;
+}
+
+.markdown-body pre {
+  background-color: #2d333b;
+
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.markdown-body code {
+  color: #adbac7;
+  background-color: #2d333b;
+
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }
