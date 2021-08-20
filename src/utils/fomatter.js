@@ -2,7 +2,9 @@ import moment from "moment";
 
 export const formattedDate = (date) => {
   const itemDate = moment(date);
-  if (moment().diff(moment(date), "days") <= 30) {
+  const DAYS_30 = 30;
+
+  if (moment().diff(moment(date), "days") <= DAYS_30) {
     return itemDate.fromNow();
   }
   if (itemDate.isSame(new Date(), "year")) {
