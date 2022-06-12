@@ -8,8 +8,8 @@ const App = () => {
     <React.Fragment>
       <Router>
         <Switch>
-          <Route path="/issues/:id" exact component={IssuesDetail}></Route>
-          <Route path="/issues" exact component={IssuesList}></Route>
+          <Route path="/:id" exact component={IssuesDetail}></Route>
+          <Route path="/" exact component={IssuesList}></Route>
         </Switch>
       </Router>
     </React.Fragment>
