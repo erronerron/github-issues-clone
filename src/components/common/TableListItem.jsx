@@ -67,7 +67,7 @@ const TableListItem = ({ item }) => {
           <div>
             <Link
               className="fw-bold text-decoration-none"
-              to={`/issues/${item.number}`}
+              to={`/${item.number}`}
             >
               {item.title}
             </Link>
